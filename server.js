@@ -26,7 +26,7 @@ app.use("/books", bookRouter);
 app.use("/orders", orderRouter);
 
 const swaggerDocument = YAML.load("swagger.yaml");
-app.use("/api-docs".swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const port = 3000;
 
