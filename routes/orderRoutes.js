@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Order = require("../models/order");
+const Book = require("./../models/book");
 
 const router = Router();
 
@@ -15,10 +16,11 @@ router.get("/", async (req, res) => {
 
 // create individual
 router.post("/", async (req, res) => {
+  const book = await Book.findById(req.body.bookId);
   const order = new Order({
     date: req.body.date,
     username: req.body.username,
-    bookId: req.body.bookId,
+    bookId: book,
     return: req.body.return,
   });
   try {
@@ -46,7 +48,7 @@ router.patch("/:id", getOrderById, async (req, res) => {
     res.order.return = req.body.return;
   }
   if (req.body.bookId != null) {
-    res.order.bookId = req.body.bookId;
+    res.order.bookId = await Book.findById(req.body.bookId);
   }
   try {
     const updatedOrder = await res.order.save();
