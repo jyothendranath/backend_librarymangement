@@ -141,7 +141,7 @@ paths:
     patch:
       tags: [Book]
       summary: Updated Book
-      description: update the book object by ID
+      description: updates the book object
       requestBody:
         required: true
         content:
@@ -164,7 +164,7 @@ paths:
     delete:
       tags: [Book]
       summary: Delete book
-      description: deleting book object by ID
+      description: deletes the book object
       produces:
         - "application/json"
       parameters:
@@ -222,7 +222,7 @@ paths:
     patch:
       tags: [Order]
       summary: Updated Order
-      description: update the order object by ID
+      description: updates the order object
       requestBody:
         required: true
         content:
@@ -245,7 +245,7 @@ paths:
     delete:
       tags: [Order]
       summary: Delete Order
-      description: deleting order object by ID
+      description: deletes the order object
       produces:
         - "application/json"
       parameters:
