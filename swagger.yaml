@@ -5,7 +5,7 @@ info:
   description: A simple API to do CRUD on users, books, orders resources in online library
 
 servers:
-  - url: http://localhost:3000/
+  - url: http://localhost:5000/
 
 tags:
   - name: User
