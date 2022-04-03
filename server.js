@@ -42,7 +42,7 @@ app.use("/search", search);
 const loginRouter = require("./routes/loginRoutes");
 app.use("/login", loginRouter);
 
-const port = 3000;
+const port = 5000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
