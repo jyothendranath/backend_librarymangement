@@ -3,7 +3,7 @@ const { Router } = require("express");
 const User = require("../models/user");
 const Book = require("../models/book");
 const Order = require("../models/order");
-const auth = require("../middlewares/auth")
+const auth = require("../middlewares/auth");
 
 const router = Router();
 
@@ -20,7 +20,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.get("/books",auth ,async (req, res) => {
+router.get("/books", auth, async (req, res) => {
   let filter = {};
   for (let key in req.query) {
     filter[key] = { $regex: req.query[key], $options: "i" };
@@ -34,7 +34,7 @@ router.get("/books",auth ,async (req, res) => {
   }
 });
 
-router.get("/orders",auth ,async (req, res) => {
+router.get("/orders", auth, async (req, res) => {
   let filter = {};
   try {
     if (req.query.username !== undefined) {

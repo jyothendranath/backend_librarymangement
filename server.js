@@ -1,10 +1,10 @@
-const cors = require('cors');
+const cors = require("cors");
 const YAML = require("yamljs");
 const express = require("express");
 const mongoose = require("mongoose");
 const swaggerUI = require("swagger-ui-express");
 
-require('dotenv').config();
+require("dotenv").config();
 
 let app = express();
 
@@ -19,9 +19,9 @@ db.once("open", () => {
 });
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-const logger = require('./middlewares/logs');
+const logger = require("./middlewares/logs");
 
 app.use(logger);
 
@@ -40,7 +40,7 @@ const search = require("./routes/searchRoutes");
 app.use("/search", search);
 
 const loginRouter = require("./routes/loginRoutes");
-app.use('/login',loginRouter);
+app.use("/login", loginRouter);
 
 const port = 3000;
 
