@@ -1,12 +1,14 @@
+const YAML = require("yamljs");
 const express = require("express");
 const mongoose = require("mongoose");
 const swaggerUI = require("swagger-ui-express");
-const YAML = require("yamljs");
+
+require('dotenv').config();
 
 let app = express();
 
-const DATABASE_URL = "mongodb://localhost/library";
-mongoose.connect(DATABASE_URL);
+const URL = process.env.DATABASE_URL;
+mongoose.connect(URL);
 const db = mongoose.connection;
 db.on("error", (err) => {
   console.log(err);
@@ -34,6 +36,9 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const search = require("./routes/searchRoutes");
 app.use("/search", search);
+
+const loginRouter = require("./routes/loginRoutes");
+app.use('/login',loginRouter);
 
 const port = 3000;
 
