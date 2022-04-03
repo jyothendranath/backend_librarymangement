@@ -284,7 +284,7 @@ components:
       example:
         username: bada
         password: b123
-        isAdmin: true
+        isAdmin: false
 
     Book:
       type: object
@@ -322,7 +322,7 @@ components:
         author: bada
         ISBN: 978-3-16-148410-0
         publication: 2001
-        link: some link of image
+        link: https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4088/9781408894996.jpg
         addedBy: manoj
 
     Order:
