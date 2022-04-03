@@ -1,3 +1,4 @@
+const cors = require('cors');
 const YAML = require("yamljs");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -18,6 +19,7 @@ db.once("open", () => {
 });
 
 app.use(express.json());
+app.use(cors())
 
 const logger = require('./middlewares/logs');
 
