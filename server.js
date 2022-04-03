@@ -28,7 +28,7 @@ app.use("/orders", orderRouter);
 const swaggerDocument = YAML.load("swagger.yaml");
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-const search = require("./api/search");
+const search = require("./routes/searchRoutes");
 app.use("/search", search);
 
 const port = 3000;
