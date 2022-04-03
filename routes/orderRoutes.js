@@ -7,7 +7,10 @@ const router = Router();
 // get collection
 router.get("/", async (req, res) => {
   try {
-    const orders = await Order.find();
+    let orders = await Order.find();
+    for (let i = 0; i < orders.length; i++) {
+      orders[i].bookId = await Book.findById(orders[i].bookId);
+    }
     res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -78,6 +81,7 @@ async function getOrderById(req, res, nxt) {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+  order.bookId = await Book.findById(order.bookId);
   res.order = order;
   nxt();
 }

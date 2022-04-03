@@ -7,13 +7,13 @@ require("dotenv").config();
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const { username, password, isAdmin } = req.body;
-  if (!(username && password && isAdmin)) {
+  const { username, password } = req.body;
+  if (!(username && password)) {
     res.status(400).json({ message: "All inputs are required" });
   }
   try {
     const user = await User.findOne({ username: username });
-    if (user && password === user.password && isAdmin === user.isAdmin) {
+    if (user && password === user.password) {
       const token = jwt.sign(
         { user_id: user._id, username },
         process.env.TOKEN_KEY,

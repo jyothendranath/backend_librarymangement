@@ -52,6 +52,9 @@ router.get("/orders", auth, async (req, res) => {
       res.status(400).json({ message: "no parameters found" });
     }
     const orders = await Order.find(filter);
+    for (let i = 0; i < orders.length; i++) {
+      orders[i].bookId = await Book.findById(orders[i].bookId);
+    }
     res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
