@@ -20,8 +20,13 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/books", async (req, res) => {
+  let filter = {};
+  for (let key in req.query) {
+    filter[key] = { $regex: req.query[key], $options: "i" };
+  }
+  console.log(filter);
   try {
-    const books = await Book.find(req.query);
+    const books = await Book.find(filter);
     res.json(books);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -29,22 +34,24 @@ router.get("/books", async (req, res) => {
 });
 
 router.get("/orders", async (req, res) => {
+  let filter = {};
   try {
     if (req.query.username !== undefined) {
-      const filter = { username: req.query.username };
-      if (req.query.return !== undefined) {
-        if (req.query.return === "true") {
-          filter.return = true;
-        }
-        if (req.query.return === "false") {
-          filter.return = false;
-        }
+      filter.username = req.query.username;
+    }
+    if (req.query.return !== undefined) {
+      if (req.query.return === "true") {
+        filter.return = true;
       }
-      const orders = await Order.find(filter);
-      res.json(orders);
-    } else {
+      if (req.query.return === "false") {
+        filter.return = false;
+      }
+    }
+    if (filter === {}) {
       res.status(400).json({ message: "no parameters found" });
     }
+    const orders = await Order.find(filter);
+    res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
