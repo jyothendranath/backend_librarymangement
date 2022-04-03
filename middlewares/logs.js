@@ -10,3 +10,4 @@ const logStream = rfs.createStream("file.log", {
 });
 
 module.exports = morgan("short", { stream: logStream });
+

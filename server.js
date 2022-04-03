@@ -17,6 +17,10 @@ db.once("open", () => {
 
 app.use(express.json());
 
+const logger = require('./middlewares/logs');
+
+app.use(logger);
+
 const userRouter = require("./routes/userRoutes");
 const bookRouter = require("./routes/bookRoutes");
 const orderRouter = require("./routes/orderRoutes");
