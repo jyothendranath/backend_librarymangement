@@ -25,7 +25,6 @@ router.get("/books", auth, async (req, res) => {
   for (let key in req.query) {
     filter[key] = { $regex: req.query[key], $options: "i" };
   }
-  console.log(filter);
   try {
     const books = await Book.find(filter);
     res.json(books);
