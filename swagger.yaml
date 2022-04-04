@@ -14,6 +14,10 @@ tags:
     description: API to manage the books.
   - name: Order
     description: API to manage the orders.
+  - name: Login
+    description: API to manage the login users.
+  - name: Search
+    description: API to manage search books and orders.
 
 paths:
   /users:
@@ -259,6 +263,81 @@ paths:
           description: Invalid order ID supplied
         "404":
           description: order not found
+  /login:
+    post:
+      summary: Creates a Login Object.
+      tags: [Login]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "201":
+          description: Logged In Successfully.
+  /search/books:
+    get:
+      tags: [Search]
+      parameters:
+        - in: header
+          name: x-access-token
+          schema: 
+            type: string
+          required: true 
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: The title of the book.
+        - in: query
+          name: author
+          schema:
+            type: string
+          description: The author of the book.
+        - in: query
+          name: ISBN
+          schema:
+            type: string
+          description: The ISBN of the book.
+        - in: query
+          name: publication
+          schema:
+            type: string
+          description: The publication of the book.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Search"
+  /search/orders:
+    get:
+      tags: [Search]
+      parameters:
+        - in: header
+          name: x-access-token
+          schema: 
+            type: string
+          required: true 
+        - in: query
+          name: uername
+          schema:
+            type: string
+          description: The username who ordered the book.
+        - in: query
+          name: return
+          schema:
+            type: boolean
+          description: Whether the book is returned or not.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Search"
 
 components:
   schemas:
@@ -353,3 +432,22 @@ components:
         username: bada
         return: true
         bookId: 624703f88534ab047cc54ecd
+
+    Login:
+      type: object
+      required:
+        - username
+        - password 
+      properties:
+        username:
+          type: string
+          decription: the name of user who logged into website.
+        password:
+          type: string
+          decription: the password of user who logged into website.
+      example:
+        username: chota
+        password: test123
+
+    Search:
+      type: object
