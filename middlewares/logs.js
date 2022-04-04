@@ -6,7 +6,7 @@ const logStream = rfs.createStream("file.log", {
   size: "5M",
   interval: "1d",
   compress: "gzip",
-  path: path.relative(__dirname, 'backend_librarymanagement/logs '),
+  path: path.relative(__dirname, 'backend_librarymangement/logs'),
 });
 
 module.exports = morgan("short", { stream: logStream });
