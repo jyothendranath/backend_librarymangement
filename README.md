@@ -1,6 +1,18 @@
-# backend_librarymangement
+# Title Backend For Online Library Management
+## Group 11
+### Group-member Info
 
-Group 11
+B MANOJ SRINIVAS - S20190010013
+
+MELAM JAI BALA SRUJAN - S20190010119
+
+THONTA JYOTHENDRANATH - S20190010179
+
+LATCHUPATHULA KRANTHI KUSAL - S20190010107
+
+PENIKALAPATI SAI MANOJ KUMAR - S20190010138
+
+## Instructions to run the code
 
 run npm install - to install required dependencies
 or open package.json and install all dependencies using npm i <package_name>
