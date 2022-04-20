@@ -15,7 +15,7 @@ tags:
   - name: Order
     description: API to manage the orders.
   - name: Login
-    description: API to manage the login users.
+    description: API to manage the login.
   - name: Search
     description: API to manage search books and orders.
 
@@ -359,7 +359,7 @@ components:
           description: The roll number of the student
         isAdmin:
           type: boolean
-          description: The CGPA of the student
+          description: Checks whether the user is Admin or not 
       example:
         username: bada
         password: b123
