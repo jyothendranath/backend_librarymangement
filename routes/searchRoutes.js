@@ -4,6 +4,7 @@ const User = require("../models/user");
 const Book = require("../models/book");
 const Order = require("../models/order");
 const auth = require("../middlewares/auth");
+const client = require("../config/redis");
 
 const router = Router();
 
@@ -50,11 +51,19 @@ router.get("/orders", auth, async (req, res) => {
     if (filter === {}) {
       res.status(400).json({ message: "no parameters found" });
     }
-    const orders = await Order.find(filter);
-    for (let i = 0; i < orders.length; i++) {
-      orders[i].bookId = await Book.findById(orders[i].bookId);
+    const parameter = req.query.username + req.query.return;
+    const redisOrders = await client.get(parameter);
+
+    if (redisOrders === null) {
+      const orders = await Order.find(filter);
+      for (let i = 0; i < orders.length; i++) {
+        orders[i].bookId = await Book.findById(orders[i].bookId);
+      }
+      await client.set(parameter, JSON.stringify(orders));
+      res.json(orders);
+    } else {
+      res.json(JSON.parse(redisOrders));
     }
-    res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
